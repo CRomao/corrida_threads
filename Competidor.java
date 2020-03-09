@@ -16,6 +16,7 @@ public class Competidor extends Thread implements Comparable<Competidor> {
     private double tamCorrida;
     private long horaFinalizouCorrida = 0;
     private boolean terminou = false;
+
     public Competidor(String nome, int numeroRaia, double velocidade,
             int sorte, double tamCorrida) {
         setNome(nome);
@@ -50,7 +51,6 @@ public class Competidor extends Thread implements Comparable<Competidor> {
             setVelocidade(getVelocidade() - (getVelocidade() * 0.03));
             setQtdImprevistos(getQtdImprevistos() + 1);
         }
-
     }
 
     public void run() {
@@ -60,14 +60,14 @@ public class Competidor extends Thread implements Comparable<Competidor> {
             tirarCansacoVelocidade();
             try {
                 Thread.sleep(1000);
-                setHoraFinalizouCorrida(getHoraFinalizouCorrida()+1);
+                setHoraFinalizouCorrida(getHoraFinalizouCorrida() + 1);
                 System.out.printf("Competidor: %s | Velocidade: %.2f | Cansaço: %.2f | Metros Percorridos: %.2f | QTD Imprevistos: %d \n", getNome(), getVelocidade(), getCansaco(),
-                         getMetrosPercorridos(), getQtdImprevistos());
+                        getMetrosPercorridos(), getQtdImprevistos());
             } catch (InterruptedException ex) {
                 Logger.getLogger(Competidor.class.getName()).log(Level.SEVERE, null, ex);
             }
         } while (!finalizouCorrida());
-        
+
     }
 
     public boolean finalizouCorrida() {
@@ -79,6 +79,20 @@ public class Competidor extends Thread implements Comparable<Competidor> {
         }
     }
 
+    public void metrosPercorridos() {
+        setMetrosPercorridos(getVelocidade() + getMetrosPercorridos());
+    }
+
+    @Override
+    public int compareTo(Competidor outroCompetidor) {
+        if (getHoraFinalizouCorrida() < outroCompetidor.getHoraFinalizouCorrida()) {
+            return -1;
+        } else if (getHoraFinalizouCorrida() > outroCompetidor.getHoraFinalizouCorrida()) {
+            return 1;
+        }
+        return 0;
+    }
+
     public boolean isTerminou() {
         return terminou;
     }
@@ -87,20 +101,6 @@ public class Competidor extends Thread implements Comparable<Competidor> {
         this.terminou = terminou;
     }
 
-    public void metrosPercorridos() {
-        setMetrosPercorridos(getVelocidade() + getMetrosPercorridos());
-    }
-
-    @Override
-    public int compareTo(Competidor outroCompetidor) {
-        if(getHoraFinalizouCorrida()< outroCompetidor.getHoraFinalizouCorrida()){
-            return -1;
-        }else if(getHoraFinalizouCorrida() > outroCompetidor.getHoraFinalizouCorrida()){
-            return 1;
-        }
-        return 0;
-    }
-    
     public String getNome() {
         return nome;
     }

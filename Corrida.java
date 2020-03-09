@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Corrida extends Thread{
+public class Corrida extends Thread {
 
     ArrayList<Competidor> competidores = new ArrayList<>();
 
@@ -25,41 +25,24 @@ public class Corrida extends Thread{
             competidores.get(i).start();
         }
         fimCorrida();
+    }
 
-    }
-    
-    public void fimCorrida(){
-        int i=0,cont = 0, contTotal = 0;
-        do{
-            if(competidores.get(i).isTerminou() == false){
-                i++;
-            }else{
-                cont++;
-                i++;
-            }
-            if(i >= competidores.size()){
-                i = 0;
-                for(int j=0; j<competidores.size(); j++){
-                    if(competidores.get(j).isTerminou() == true){
-                        contTotal++;
-                    }
-                }
-                if(competidores.size() == contTotal){
-                    cont = competidores.size();
-                    break;
-                }else{
-                    cont = 0;
-                    contTotal = 0;
+    public void fimCorrida() {
+        int contTotal;
+        do {
+            contTotal = 0;
+            for (int i = 0; i < competidores.size(); i++) {
+                if (competidores.get(i).isTerminou() == true) {
+                    contTotal++;
                 }
             }
-        }while(cont != competidores.size());
+        } while (contTotal != competidores.size());
     }
-    
+
     public void rankingCompetidor(ArrayList<Competidor> lista) {
-        for (int i = 0; i<competidores.size(); i++) {
+        for (int i = 0; i < competidores.size(); i++) {
             System.out.println(competidores.get(i).getNome() + " | " + competidores.get(i).getHoraFinalizouCorrida() + " segundos");
         }
     }
-
 
 }
