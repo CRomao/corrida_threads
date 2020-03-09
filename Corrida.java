@@ -1,4 +1,4 @@
-package thread;
+package corrida_threads;
 
 import java.util.ArrayList;
 import java.util.logging.Level;

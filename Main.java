@@ -1,4 +1,4 @@
-package thread;
+package corrida_threads;
 
 import java.util.Collections;
 import java.util.Random;

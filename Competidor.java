@@ -1,4 +1,4 @@
-package thread;
+package corrida_threads;
 
 import java.util.Random;
 import java.util.logging.Level;
