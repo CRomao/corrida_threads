@@ -1,10 +1,10 @@
-﻿import java.security.Timestamp;
-import java.util.Date;
+package thread;
+
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Competidor extends Thread {
+public class Competidor extends Thread implements Comparable<Competidor> {
 
     private String nome;
     private int numeroRaia;
@@ -16,7 +16,6 @@ public class Competidor extends Thread {
     private double tamCorrida;
     private long horaFinalizouCorrida = 0;
     private boolean terminou = false;
-    Date d = new Date();
     public Competidor(String nome, int numeroRaia, double velocidade,
             int sorte, double tamCorrida) {
         setNome(nome);
@@ -73,7 +72,6 @@ public class Competidor extends Thread {
 
     public boolean finalizouCorrida() {
         if (getMetrosPercorridos() >= getTamCorrida()) {
-            System.out.println(d.getTime());
             setTerminou(true);
             return true;
         } else {
@@ -93,6 +91,16 @@ public class Competidor extends Thread {
         setMetrosPercorridos(getVelocidade() + getMetrosPercorridos());
     }
 
+    @Override
+    public int compareTo(Competidor outroCompetidor) {
+        if(getHoraFinalizouCorrida()< outroCompetidor.getHoraFinalizouCorrida()){
+            return -1;
+        }else if(getHoraFinalizouCorrida() > outroCompetidor.getHoraFinalizouCorrida()){
+            return 1;
+        }
+        return 0;
+    }
+    
     public String getNome() {
         return nome;
     }
