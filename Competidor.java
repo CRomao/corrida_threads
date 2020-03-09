@@ -71,12 +71,9 @@ public class Competidor extends Thread implements Comparable<Competidor> {
     }
 
     public boolean finalizouCorrida() {
-        if (getMetrosPercorridos() >= getTamCorrida()) {
-            setTerminou(true);
-            return true;
-        } else {
-            return false;
-        }
+        boolean verificador = getMetrosPercorridos() >= getTamCorrida() ? true : false;
+        setTerminou(verificador);
+        return verificador;
     }
 
     public void metrosPercorridos() {
