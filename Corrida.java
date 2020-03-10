@@ -21,6 +21,7 @@ public class Corrida extends Thread {
     }
 
     public void run() {
+        System.out.println("A corrida começou!!!\n");
         for (int i = 0; i < competidores.size(); i++) {
             competidores.get(i).start();
         }
@@ -41,10 +42,11 @@ public class Corrida extends Thread {
 
     public void rankingCompetidor(ArrayList<Competidor> lista) {
         System.out.println("\nA corrida terminou!\n");
-        System.out.println("-=-=--=-=-Resultados da corrida-=-=--=-=-");
-        System.out.println("LUGAR\t|\tCOMPETIDOR\t|\tTEMPO DECORRIDO");
+        System.out.println("\t\t-=-=--=-=-Resultados da corrida-=-=--=-=-\n");
+        System.out.println("LUGAR\t|\tCOMPETIDOR\t|\tTEMPO DECORRIDO\t|\tIMPREVISTOS");
         for (int i = 0; i < competidores.size(); i++) {
-            System.out.printf("%dº\t|\t%s    \t|\t%d segundos\n", i+1, competidores.get(i).getNome(), competidores.get(i).getHoraFinalizouCorrida());
+            System.out.printf("%dº\t|\t%s    \t|\t%d segundo(s)\t|\t%d imprevisto(s)\n", i+1, competidores.get(i).getNome(), 
+            competidores.get(i).getHoraFinalizouCorrida(), competidores.get(i).getQtdImprevistos());
         }
     }
 
