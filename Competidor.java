@@ -9,6 +9,7 @@ public class Competidor extends Thread implements Comparable<Competidor> {
     private String nome;
     private int numeroRaia;
     private double velocidade;
+    private double velocidadeInicial;
     private double metrosPercorridos;
     private double cansaco;
     private int sorte;
@@ -25,6 +26,7 @@ public class Competidor extends Thread implements Comparable<Competidor> {
         setSorte(sorte);
         setTamCorrida(tamCorrida);
         calcularCansaco();
+        setVelocidadeInicial(velocidade);
     }
 
     public void calcularCansaco() {
@@ -59,6 +61,7 @@ public class Competidor extends Thread implements Comparable<Competidor> {
             gerarImprevisto();
             tirarCansacoVelocidade();
             try {
+                verificarVelocidade();
                 Thread.sleep(1000);
                 setHoraFinalizouCorrida(getHoraFinalizouCorrida() + 1);
                 System.out.printf("Competidor: %s | Velocidade: %.2f | Cansaço: %.2f | Metros Percorridos: %.2f | QTD Imprevistos: %d \n", getNome(), getVelocidade(), getCansaco(),
@@ -71,9 +74,19 @@ public class Competidor extends Thread implements Comparable<Competidor> {
     }
 
     public boolean finalizouCorrida() {
-        boolean verificador = (getMetrosPercorridos() >= getTamCorrida()|| getVelocidade() <= 0) ? true : false;
+        boolean verificador = getMetrosPercorridos() >= getTamCorrida() ? true : false;
         setTerminou(verificador);
         return verificador;
+    }
+    
+    public void verificarVelocidade() throws InterruptedException{
+        if(getVelocidade() <= 0){
+            System.out.println("***Competidor "+getNome()+" cansou, retornará em 5 segundos.");
+            Thread.sleep(5000);
+            setHoraFinalizouCorrida(getHoraFinalizouCorrida() + 5);
+            setVelocidade(getVelocidadeInicial()*0.6);
+            System.out.println("***Competidor "+getNome()+" voltou a correr com -40% da velocidade inicial.");
+        }
     }
 
     public void metrosPercorridos() {
@@ -90,6 +103,14 @@ public class Competidor extends Thread implements Comparable<Competidor> {
         return 0;
     }
 
+    public double getVelocidadeInicial() {
+        return velocidadeInicial;
+    }
+
+    public void setVelocidadeInicial(double velocidadeInicial) {
+        this.velocidadeInicial = velocidadeInicial;
+    }
+    
     public boolean isTerminou() {
         return terminou;
     }

@@ -9,7 +9,7 @@ public class Main {
 
         Competidor competidor1 = new Competidor("Thread1", 1, 13, 6, 500);
         Competidor competidor2 = new Competidor("Thread2", 2, 15, 1, 500);
-        Competidor competidor3 = new Competidor("Thread3", 3, 5, 5, 500);
+        Competidor competidor3 = new Competidor("Thread3", 3, 5, 1, 500);
 
         Corrida corrida = new Corrida();
 
