@@ -82,8 +82,8 @@ public class Competidor extends Thread implements Comparable<Competidor> {
     public void verificarVelocidade() throws InterruptedException{
         if(getVelocidade() <= 0){
             System.out.println("***Competidor "+getNome()+" cansou, retornará em 5 segundos.");
-            Thread.sleep(5000);
-            setHoraFinalizouCorrida(getHoraFinalizouCorrida() + 5);
+            Thread.sleep(4000);
+            setHoraFinalizouCorrida(getHoraFinalizouCorrida() + 4);
             setVelocidade(getVelocidadeInicial()*0.6);
             System.out.println("***Competidor "+getNome()+" voltou a correr com -40% da velocidade inicial.");
         }
