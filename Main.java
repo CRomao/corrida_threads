@@ -7,9 +7,9 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        Competidor competidor1 = new Competidor("Thread1", 1, 13, 6, 50);
-        Competidor competidor2 = new Competidor("Thread2", 2, 15, 1, 50);
-        Competidor competidor3 = new Competidor("Thread3", 3, 5, 5, 50);
+        Competidor competidor1 = new Competidor("Thread1", 1, 13, 6, 500);
+        Competidor competidor2 = new Competidor("Thread2", 2, 15, 1, 500);
+        Competidor competidor3 = new Competidor("Thread3", 3, 5, 5, 500);
 
         Corrida corrida = new Corrida();
 
